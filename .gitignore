@@ -4,6 +4,8 @@
 /.classpath
 /.idea
 /.DS_Store
+/.nondex
+/.logs
 *.iml
 /src/test/java/com/alibaba/json/bvt/parser/autoType/
 /bin/

@@ -1,7 +1,10 @@
 package com.alibaba.json.bvt.issue_1300;
 
+import static net.javacrumbs.jsonunit.assertj.JsonAssertions.assertThatJson;
+
 import com.alibaba.fastjson.JSON;
 import junit.framework.TestCase;
+import net.javacrumbs.jsonunit.core.Option;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,6 +25,9 @@ public class Issue1363 extends TestCase {
         System.out.println(jsonStr);
         DataSimpleVO obj = JSON.parseObject(jsonStr, DataSimpleVO.class);
         assertEquals(jsonStr, JSON.toJSONString(obj));
+        assertThatJson(jsonStr)
+        .when(Option.IGNORING_ARRAY_ORDER)
+        .isEqualTo(JSON.toJSONString(obj));
 
     }
 
@@ -38,7 +44,10 @@ public class Issue1363 extends TestCase {
         DataSimpleVO obj = JSON.parseObject(jsonStr, DataSimpleVO.class);
         System.out.println(obj.toString());
         assertNotNull(obj.value1);
-        assertEquals(jsonStr, JSON.toJSONString(obj));
+        assertThatJson(jsonStr)
+        .when(Option.IGNORING_ARRAY_ORDER)
+        .isEqualTo(JSON.toJSONString(obj));
+//        assertEquals(jsonStr, JSON.toJSONString(obj));
     }
 
     public static class DataSimpleVO {
